@@ -3,19 +3,23 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
 var nodeSpotify = require('node-spotify-api');
+var colors = require('colors');
 
 // FUNCTIONS
 
 // concert-this
 function concertThis (artist) {
+
+    console.log("===============".red);
+    console.log(artist.toUpperCase().red);
+    console.log("===============\n".red);
+
     bandsInTownURL = "https://rest.bandsintown.com/artists/" + encodeURIComponent(artist) + "/events?app_id=codingbootcamp"
-    
+
     axios.get(bandsInTownURL).then(
         function(response) {
-            // console.log(response.data);
-
             for (i in response.data) {
-                console.log(response.data[i].venue.name);
+                console.log(response.data[i].venue.name.underline);
                 console.log(response.data[i].venue.city + ", " + response.data[i].venue.country);
                 console.log(response.data[i].datetime + "\n");
             }
