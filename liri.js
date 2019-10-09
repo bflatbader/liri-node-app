@@ -48,24 +48,55 @@ function concertThis (artist) {
         });        
 }
 
-// VARIABLES
-var spotify = new nodeSpotify({
-    id: '3c99faab3e1843d395987fe86a73d1cc',
-    secret: '524a02087eb94d09ae1a27be7edcdfbb'
-});
+// spotify-this-song
+function spotify (song) {
 
+    if (song) {
+        // A song was provided, do nothing
+    } else {
+        // No song was provided, default to "The Sign"
+        song = "the sign ace of base"
+    }
+
+    spotify = new nodeSpotify(keys.spotify);
+    
+    spotify.search({ type: 'track', query: song, limit: 1 })
+        .then(function(response) {
+            
+            console.log("\nARTISTS".red);
+
+            for (i in response.tracks.items[0].artists) {
+                console.log(response.tracks.items[0].artists[i].name)
+            }
+
+            console.log("\nTRACK".red);
+            console.log(response.tracks.items[0].album.name);
+
+            console.log("\nALBUM".red);
+            console.log(response.tracks.items[0].name);
+
+            console.log("\nPREVIEW".red);
+            console.log(response.tracks.items[0].external_urls.spotify);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+}
+
+
+// VARIABLES
 var command = process.argv[2];
 var args = process.argv;
 var searchString = process.argv.slice(3).join(" ");
 
-// Determine which command was entered
+// Determine which command was entered and call the appropriate function
 switch(command) {
     case "concert-this":
         concertThis(searchString);
         break;
 
     case "spotify-this-song":
-        // code
+        spotify(searchString);
         break;
 
     case "movie-this":
