@@ -10,18 +10,16 @@ var colors = require('colors');
 // concert-this
 function concertThis (artist) {
 
-    console.log("===============".red);
-    console.log(artist.toUpperCase().red);
-    console.log("===============\n".red);
+    console.log("\n" + artist.toUpperCase().red + "\n");
 
     bandsInTownURL = "https://rest.bandsintown.com/artists/" + encodeURIComponent(artist) + "/events?app_id=codingbootcamp"
 
     axios.get(bandsInTownURL).then(
         function(response) {
             for (i in response.data) {
-                console.log(response.data[i].venue.name.underline);
-                console.log(response.data[i].venue.city + ", " + response.data[i].venue.country);
-                console.log(response.data[i].datetime + "\n");
+                console.log("VENUE:     ".yellow + response.data[i].venue.name.underline);
+                console.log("LOCATION:  ".yellow + response.data[i].venue.city + ", " + response.data[i].venue.country);
+                console.log("DATE/TIME: ".yellow + response.data[i].datetime + "\n");
             }
         
 
