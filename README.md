@@ -3,7 +3,7 @@
 
 <p align="center">
     <img src="images/liriLogo.jpg" alt="Logo"><br>
-    <a href="https://drive.google.com/file/d/1019yHoqs4ML7f227Ub9DqBWvQtG_Zmh-/view" target="blank">View Demo</a><br>
+    <a href="https://drive.google.com/file/d/1bvYRMY36ktTMcMObd2vY-AoIRs56S0uG/view" target="blank">View Demo</a><br>
 </p>
 
 
