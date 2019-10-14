@@ -1,4 +1,4 @@
-![LIRI Bot logo](/images/liriLogo.jpg)
+<div style="text-align:center"><img src="images/liriLogo.jpg" /></div>
 
 # LIRI Bot
 
