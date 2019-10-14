@@ -191,11 +191,25 @@ function logCreate (string) {
       
 }
 
+function logo () {
+    logo = `
+    
+    .____    ._____________.___  __________        __   
+    |    |   |   |_____    |   | |______   | _____/  |__.
+    |    |   |   ||       _/   |  |    |  _//  _  |   __/
+    |    |___|   ||    |   |   |  |    |   (  <_> )  |  
+    |________|___||____|_  /___|  |______  /|____/|__|           
+    
+    `
+    console.log(logo);
+}
+
 // VARIABLES
 var command = process.argv[2];
 var searchString = process.argv.slice(3).join(" ");
 var stringToLog = command + " " + searchString;
 
 // CODE
+logo();
 runCommands(command, searchString);
 logCreate(stringToLog);

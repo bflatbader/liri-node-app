@@ -1,3 +1,6 @@
+[![Generic badge](https://img.shields.io/badge/Portfolio-Red.svg)](https://bflatbader.github.io/)
+[![Generic badge](https://img.shields.io/badge/LinkedIn-Blue.svg)](https://www.linkedin.com/in/bishop-bader/)
+
 <p align="center">
     <img src="images/liriLogo.jpg" alt="Logo"><br>
     <a href="https://drive.google.com/file/d/1019yHoqs4ML7f227Ub9DqBWvQtG_Zmh-/view" target="blank">View Demo</a><br>
@@ -29,9 +32,12 @@ App Command | Short Description
 `do-what-it-says`   | Runs the command in random.txt
 
 #### concert-this
+![concert-this Example](/images/concert-this.jpg)
 
 #### spotify-this-song
+![spotify-this Example](/images/spotify-this.jpg)
 
 #### movie-this
+![movie-this Example](/images/movie-this.jpg)
 
 #### do-what-it-says
