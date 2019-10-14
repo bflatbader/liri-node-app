@@ -5,6 +5,7 @@ var axios = require("axios");
 var nodeSpotify = require('node-spotify-api');
 var colors = require('colors');
 var fs = require("fs");
+var moment = require('moment');
 
 // FUNCTIONS
 
@@ -40,9 +41,11 @@ function concertThis (artist) {
     axios.get(bandsInTownURL).then(
         function(response) {
             for (i in response.data) {
+                showTime = moment(response.data[i].datetime);
+                
                 console.log("VENUE:     ".grey + response.data[i].venue.name.underline);
                 console.log("LOCATION:  ".grey + response.data[i].venue.city + ", " + response.data[i].venue.country);
-                console.log("DATE/TIME: ".grey + response.data[i].datetime + "\n");
+                console.log("DATE/TIME: ".grey + showTime.format("MM/DD/YYYY") + "\n");
             }
         
 
@@ -117,14 +120,14 @@ function movieThis (title) {
 
     axios.get(omdbURL).then(
         function(response) {
-                console.log("\nTITLE:        ".yellow + response.data.Title);
-                console.log("RELEASED:     ".yellow + response.data.Year);
-                console.log("IMDB RATING:  ".yellow + response.data.Ratings[0].Value);
-                console.log("TOMATOMETER:  ".yellow + response.data.Ratings[1].Value);
-                console.log("COUNTRY       ".yellow + response.data.Country);
-                console.log("LANGUAGE:     ".yellow + response.data.Language);
-                console.log("PLOT:         ".yellow + response.data.Plot);
-                console.log("ACTORS:       ".yellow + response.data.Actors);
+                console.log("\nTITLE:        ".grey + response.data.Title);
+                console.log("RELEASED:     ".grey + response.data.Year);
+                console.log("IMDB RATING:  ".grey + response.data.Ratings[0].Value);
+                console.log("TOMATOMETER:  ".grey + response.data.Ratings[1].Value);
+                console.log("COUNTRY       ".grey + response.data.Country);
+                console.log("LANGUAGE:     ".grey + response.data.Language);
+                console.log("PLOT:         ".grey + response.data.Plot);
+                console.log("ACTORS:       ".grey + response.data.Actors);
         })
         .catch(function(error) {
             if (error.response) {
