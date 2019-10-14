@@ -43,9 +43,12 @@ function concertThis (artist) {
             for (i in response.data) {
                 showTime = moment(response.data[i].datetime);
                 
-                console.log("VENUE:     ".grey + response.data[i].venue.name.underline);
+                console.log("VENUE:     ".grey + response.data[i].venue.name);
+                logCreate(response.data[i].venue.name);
                 console.log("LOCATION:  ".grey + response.data[i].venue.city + ", " + response.data[i].venue.country);
-                console.log("DATE/TIME: ".grey + showTime.format("MM/DD/YYYY") + "\n");
+                logCreate(response.data[i].venue.country);
+                console.log("DATE:      ".grey + showTime.format("MM/DD/YYYY") + "\n");
+                logCreate(showTime.format("MM/DD/YYYY"));
             }
         
 
@@ -91,16 +94,20 @@ function spotify (song) {
 
             for (i in response.tracks.items[0].artists) {
                 console.log(response.tracks.items[0].artists[i].name)
+                logCreate(response.tracks.items[0].artists[i].name);
             }
 
             console.log("\nTRACK".red);
             console.log(response.tracks.items[0].name);
+            logCreate(response.tracks.items[0].name);
 
             console.log("\nALBUM".red);
             console.log(response.tracks.items[0].album.name);
+            logCreate(response.tracks.items[0].album.name);
 
             console.log("\nPREVIEW".red);
             console.log(response.tracks.items[0].external_urls.spotify);
+            logCreate(response.tracks.items[0].external_urls.spotify);
         })
         .catch(function(err) {
             console.log(err);
@@ -121,13 +128,21 @@ function movieThis (title) {
     axios.get(omdbURL).then(
         function(response) {
                 console.log("\nTITLE:        ".grey + response.data.Title);
+                logCreate(response.data.Title);
                 console.log("RELEASED:     ".grey + response.data.Year);
+                logCreate(response.data.Year);
                 console.log("IMDB RATING:  ".grey + response.data.Ratings[0].Value);
+                logCreate(response.data.Ratings[0].Value);
                 console.log("TOMATOMETER:  ".grey + response.data.Ratings[1].Value);
+                logCreate(response.data.Ratings[1].Value);
                 console.log("COUNTRY       ".grey + response.data.Country);
+                logCreate(response.data.Country);
                 console.log("LANGUAGE:     ".grey + response.data.Language);
+                logCreate(response.data.Language);
                 console.log("PLOT:         ".grey + response.data.Plot);
+                logCreate(response.data.Plot);
                 console.log("ACTORS:       ".grey + response.data.Actors);
+                logCreate(response.data.Actors);
         })
         .catch(function(error) {
             if (error.response) {
@@ -163,10 +178,24 @@ function doRandomFromFile () {
     });
 }
 
+function logCreate (string) {
+    string = string + "\n";
+    fs.appendFile("./log.txt", string, function(err) {
+
+        // If an error was experienced we will log it.
+        if (err) {
+          console.log(err);
+        }
+      
+      });
+      
+}
+
 // VARIABLES
 var command = process.argv[2];
-var args = process.argv;
 var searchString = process.argv.slice(3).join(" ");
+var stringToLog = command + " " + searchString;
 
 // CODE
 runCommands(command, searchString);
+logCreate(stringToLog);
