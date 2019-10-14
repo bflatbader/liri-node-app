@@ -1,4 +1,4 @@
-<div style="text-align:center"><img src="images/liriLogo.jpg" /></div>
+<img align="center" src="images/liriLogo.jpg" alt="LIRI Bot logo">
 
 # LIRI Bot
 
