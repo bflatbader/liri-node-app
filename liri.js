@@ -4,8 +4,31 @@ var keys = require("./keys.js");
 var axios = require("axios");
 var nodeSpotify = require('node-spotify-api');
 var colors = require('colors');
+var fs = require("fs");
 
 // FUNCTIONS
+
+// Run Commands
+function runCommands (command, searchString) {
+    // Determine which command was entered and call the appropriate function
+    switch(command) {
+        case "concert-this":
+            concertThis(searchString);
+            break;
+
+        case "spotify-this-song":
+            spotify(searchString);
+            break;
+
+        case "movie-this":
+            movieThis(searchString);
+            break;
+
+        case "do-what-it-says":
+            doRandomFromFile();
+            break;
+    }
+}
 
 // concert-this
 function concertThis (artist) {
@@ -17,9 +40,9 @@ function concertThis (artist) {
     axios.get(bandsInTownURL).then(
         function(response) {
             for (i in response.data) {
-                console.log("VENUE:     ".yellow + response.data[i].venue.name.underline);
-                console.log("LOCATION:  ".yellow + response.data[i].venue.city + ", " + response.data[i].venue.country);
-                console.log("DATE/TIME: ".yellow + response.data[i].datetime + "\n");
+                console.log("VENUE:     ".grey + response.data[i].venue.name.underline);
+                console.log("LOCATION:  ".grey + response.data[i].venue.city + ", " + response.data[i].venue.country);
+                console.log("DATE/TIME: ".grey + response.data[i].datetime + "\n");
             }
         
 
@@ -81,6 +104,7 @@ function spotify (song) {
         });
 }
 
+// movie-this
 function movieThis (title) {
     if (title) {
         // A movie title was provided, do nothing
@@ -124,26 +148,22 @@ function movieThis (title) {
         });        
 }
 
+// do-what-it-says
+function doRandomFromFile () {
+    fs.readFile("./random.txt", "utf8", function(error, command) {
+        if (error) {
+            return console.log(error);
+          }
+        
+        command = command.split(",");
+        runCommands(command[0], command[1]);
+    });
+}
+
 // VARIABLES
 var command = process.argv[2];
 var args = process.argv;
 var searchString = process.argv.slice(3).join(" ");
 
-// Determine which command was entered and call the appropriate function
-switch(command) {
-    case "concert-this":
-        concertThis(searchString);
-        break;
-
-    case "spotify-this-song":
-        spotify(searchString);
-        break;
-
-    case "movie-this":
-        movieThis(searchString);
-        break;
-
-    case "do-what-it-says":
-        // code
-        break;
-}
+// CODE
+runCommands(command, searchString);
